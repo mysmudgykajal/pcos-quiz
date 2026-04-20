@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Type of PCOS Do You Have? | @mysmudgykajal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F0E8;
+    --dark: #1A1410;
+    --blush: #D4856A;
+    --rose: #C4614A;
+    --muted: #8B7355;
+    --light-muted: #E8DDD0;
+    --card-bg: #FDFAF6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--dark); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  .noise { position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+  .container { max-width: 680px; margin: 0 auto; padding: 40px 20px 80px; position: relative; z-index: 1; }
+  .header { text-align: center; margin-bottom: 48px; animation: fadeUp 0.8s ease both; }
+  .header .tag { display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blush); font-weight: 500; margin-bottom: 16px; border: 1px solid var(--blush); padding: 6px 16px; border-radius: 100px; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 6vw, 42px); line-height: 1.2; color: var(--dark); margin-bottom: 16px; }
+  .header h1 em { font-style: italic; color: var(--blush); }
+  .header p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 auto 8px; }
+  .header .credit { font-size: 12px; color: var(--blush); font-weight: 500; }
+  .progress-wrap { margin-bottom: 32px; animation: fadeUp 0.8s 0.1s ease both; }
+  .progress-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 500; letter-spacing: 0.05em; }
+  .progress-bar { height: 3px; background: var(--light-muted); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blush), var(--rose)); border-radius: 10px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+  .question-card { background: var(--card-bg); border-radius: 24px; padding: 36px 32px; border: 1px solid var(--light-muted); box-shadow: 0 4px 40px rgba(26,20,16,0.06); animation: fadeUp 0.6s ease both; }
+  .question-number { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blush); font-weight: 500; margin-bottom: 12px; }
+  .question-text { font-family: 'Playfair Display', serif; font-size: clamp(18px, 4vw, 24px); line-height: 1.4; color: var(--dark); margin-bottom: 28px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn { background: white; border: 1.5px solid var(--light-muted); border-radius: 14px; padding: 14px 20px; text-align: left; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--dark); line-height: 1.5; transition: all 0.2s ease; position: relative; overflow: hidden; }
+  .option-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--blush), var(--rose)); opacity: 0; transition: opacity 0.2s ease; }
+  .option-btn span { position: relative; z-index: 1; }
+  .option-btn:hover { border-color: var(--blush); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212,133,106,0.15); }
+  .option-btn.selected { border-color: var(--rose); color: white; }
+  .option-btn.selected::before { opacity: 1; }
+  .nav-wrap { display: flex; justify-content: flex-end; margin-top: 28px; gap: 12px; }
+  .btn-back { background: transparent; border: 1.5px solid var(--light-muted); color: var(--muted); border-radius: 100px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+  .btn-back:hover { border-color: var(--muted); color: var(--dark); }
+  .btn-next { background: linear-gradient(135deg, var(--blush), var(--rose)); border: none; color: white; border-radius: 100px; padding: 12px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(196,97,74,0.3); }
+  .btn-next:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(196,97,74,0.4); }
+  .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .results-wrap { animation: fadeUp 0.8s ease both; }
+  .results-header { text-align: center; margin-bottom: 32px; }
+  .results-header .emoji { font-size: 48px; margin-bottom: 16px; display: block; }
+  .results-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 5vw, 36px); margin-bottom: 8px; }
+  .results-header p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  .type-card { background: var(--card-bg); border-radius: 24px; padding: 32px; border: 1px solid var(--light-muted); margin-bottom: 16px; box-shadow: 0 4px 40px rgba(26,20,16,0.06); position: relative; overflow: hidden; }
+  .type-card.primary { border-color: var(--blush); border-width: 2px; }
+  .type-card.primary::before { content: 'PRIMARY TYPE'; position: absolute; top: 16px; right: 16px; font-size: 10px; letter-spacing: 0.15em; color: var(--blush); font-weight: 600; background: rgba(212,133,106,0.1); padding: 4px 10px; border-radius: 100px; }
+  .type-name { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); margin-bottom: 6px; }
+  .type-subtitle { font-size: 12px; color: var(--blush); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; }
+  .type-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+  .symptoms-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .symptom-tag { background: var(--light-muted); color: var(--dark); font-size: 12px; padding: 5px 12px; border-radius: 100px; font-weight: 400; }
+  .what-to-do { background: rgba(212,133,106,0.08); border-radius: 14px; padding: 16px 20px; }
+  .what-to-do h4 { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blush); font-weight: 600; margin-bottom: 10px; }
+  .what-to-do ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .what-to-do ul li { font-size: 13px; color: var(--dark); line-height: 1.5; padding-left: 16px; position: relative; }
+  .what-to-do ul li::before { content: '→'; position: absolute; left: 0; color: var(--blush); font-size: 11px; }
+  .score-bar-wrap { margin-bottom: 20px; }
+  .score-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .score-bar { height: 6px; background: var(--light-muted); border-radius: 10px; overflow: hidden; }
+  .score-fill { height: 100%; background: linear-gradient(90deg, var(--blush), var(--rose)); border-radius: 10px; transition: width 1s cubic-bezier(0.4,0,0.2,1) 0.3s; }
+  .disclaimer { background: white; border-radius: 16px; padding: 20px 24px; border: 1px solid var(--light-muted); margin-top: 24px; margin-bottom: 24px; }
+  .disclaimer h4 { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .disclaimer p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .restart-btn { width: 100%; background: linear-gradient(135deg, var(--blush), var(--rose)); border: none; color: white; border-radius: 14px; padding: 16px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(196,97,74,0.3); }
+  .restart-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,97,74,0.4); }
+  .share-btn { width: 100%; background: white; border: 1.5px solid var(--blush); color: var(--blush); border-radius: 14px; padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .share-btn:hover { background: rgba(212,133,106,0.06); transform: translateY(-1px); }
+  .share-toast { display: none; text-align: center; font-size: 13px; color: var(--blush); margin-top: 10px; font-style: italic; animation: fadeUp 0.3s ease both; }
+  .follow-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; }
+  .follow-note strong { color: var(--blush); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 480px) { .question-card { padding: 24px 20px; } .type-card { padding: 24px 20px; } }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="container">
+  <div class="header" id="quizHeader">
+    <div class="tag">@mysmudgykajal</div>
+    <h1>What type of PCOS<br>do <em>you</em> have?</h1>
+    <p>Not all PCOS is the same. Answer honestly — this will help you understand your body better and know where to start.</p>
+    <p class="credit">made with 🖤 for the girlies figuring it out</p>
+  </div>
+  <div class="progress-wrap" id="progressWrap" style="display:none">
+    <div class="progress-top">
+      <span id="progressLabel">Question 1 of 12</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="quizArea"></div>
+</div>
+<script>
+const questions = [
+  { id:1, text:"How would you describe your weight history with PCOS?", options:[{text:"I gain weight very easily, especially around my belly and it's really hard to lose",scores:{IR:3,ADR:0,INF:1,PP:0}},{text:"My weight fluctuates but it's not a major issue",scores:{IR:0,ADR:1,INF:1,PP:1}},{text:"I'm actually thin or normal weight but still have PCOS symptoms",scores:{IR:0,ADR:2,INF:1,PP:2}},{text:"I started gaining weight after stopping birth control",scores:{IR:0,ADR:0,INF:0,PP:3}}]},
+  { id:2, text:"How are your sugar and carb cravings?", options:[{text:"Intense — I constantly crave sugar, bread, rice, and feel better after eating them",scores:{IR:3,ADR:0,INF:0,PP:0}},{text:"I crave food when I'm stressed but not specifically sugar",scores:{IR:0,ADR:2,INF:0,PP:0}},{text:"I don't have strong cravings",scores:{IR:0,ADR:0,INF:1,PP:1}},{text:"My cravings started after I came off the pill",scores:{IR:0,ADR:0,INF:0,PP:2}}]},
+  { id:3, text:"How do you feel after eating a meal?", options:[{text:"Tired, heavy, sometimes brain foggy — especially after carb-heavy meals",scores:{IR:3,ADR:0,INF:1,PP:0}},{text:"Fine usually, but anxious or wired if I skip meals",scores:{IR:0,ADR:3,INF:0,PP:0}},{text:"Bloated, gassy, uncomfortable — my digestion is always off",scores:{IR:0,ADR:0,INF:3,PP:0}},{text:"Pretty normal most of the time",scores:{IR:0,ADR:0,INF:0,PP:2}}]},
+  { id:4, text:"How would you describe your stress levels and mental health?", options:[{text:"Very high stress — I feel anxious, overwhelmed, or in a constant fight-or-flight mode",scores:{IR:0,ADR:3,INF:1,PP:0}},{text:"I feel stressed but it's mostly about my body and how I look",scores:{IR:1,ADR:1,INF:0,PP:0}},{text:"I've had depression, mood swings, or emotional crashes",scores:{IR:0,ADR:1,INF:1,PP:2}},{text:"Mostly okay but I have bad days",scores:{IR:0,ADR:0,INF:0,PP:1}}]},
+  { id:5, text:"How is your sleep?", options:[{text:"I fall asleep but wake up tired — never feel rested",scores:{IR:2,ADR:1,INF:1,PP:0}},{text:"I can't fall asleep, my mind races at night",scores:{IR:0,ADR:3,INF:0,PP:0}},{text:"I sleep too much and still feel exhausted",scores:{IR:1,ADR:0,INF:2,PP:0}},{text:"Sleep became disrupted after stopping birth control",scores:{IR:0,ADR:0,INF:0,PP:3}}]},
+  { id:6, text:"What does your skin look like?", options:[{text:"Oily, acne on jawline/chin, dark patches under arms or on neck (acanthosis nigricans)",scores:{IR:3,ADR:0,INF:1,PP:0}},{text:"Breakouts mostly when I'm stressed, dull skin",scores:{IR:0,ADR:2,INF:1,PP:0}},{text:"Inflamed, red, reactive — my skin gets irritated easily",scores:{IR:0,ADR:0,INF:3,PP:0}},{text:"Breakouts started after stopping the pill",scores:{IR:0,ADR:0,INF:0,PP:3}}]},
+  { id:7, text:"How is your facial and body hair growth?", options:[{text:"Heavy facial hair, chest, stomach — grows back really fast",scores:{IR:2,ADR:2,INF:1,PP:0}},{text:"Moderate hair growth that got worse with stress",scores:{IR:0,ADR:3,INF:0,PP:0}},{text:"Some hair growth but my main issues are skin and weight",scores:{IR:2,ADR:0,INF:1,PP:0}},{text:"Hair growth started or worsened after stopping birth control",scores:{IR:0,ADR:0,INF:0,PP:3}}]},
+  { id:8, text:"How are your periods?", options:[{text:"Very irregular — sometimes months without a period",scores:{IR:2,ADR:1,INF:1,PP:1}},{text:"Irregular but I notice they're worse when I'm stressed",scores:{IR:0,ADR:3,INF:0,PP:0}},{text:"Heavy, painful, or very irregular with bad cramps",scores:{IR:0,ADR:0,INF:3,PP:0}},{text:"My periods were fine until I stopped birth control",scores:{IR:0,ADR:0,INF:0,PP:3}}]},
+  { id:9, text:"Do you have any of these symptoms? (pick the most dominant one)", options:[{text:"Hair loss/thinning on head, skin tags, difficulty losing weight despite trying",scores:{IR:3,ADR:0,INF:0,PP:0}},{text:"Headaches, jaw clenching, feeling wired but exhausted",scores:{IR:0,ADR:3,INF:0,PP:0}},{text:"Joint pain, gut issues, frequent headaches, skin rashes",scores:{IR:0,ADR:0,INF:3,PP:0}},{text:"Symptoms appeared or worsened within 6 months of stopping hormonal birth control",scores:{IR:0,ADR:0,INF:0,PP:3}}]},
+  { id:10, text:"How is your energy through the day?", options:[{text:"Energy crashes after meals, feel sluggish most of the day",scores:{IR:3,ADR:0,INF:1,PP:0}},{text:"Wired in the morning, crash in the afternoon, second wind at night",scores:{IR:0,ADR:3,INF:0,PP:0}},{text:"Low energy all day — feel chronically fatigued",scores:{IR:1,ADR:0,INF:3,PP:0}},{text:"My energy has been all over the place since stopping the pill",scores:{IR:0,ADR:0,INF:0,PP:3}}]},
+  { id:11, text:"Have you ever been on hormonal birth control?", options:[{text:"Never been on it",scores:{IR:1,ADR:1,INF:1,PP:0}},{text:"Currently on it",scores:{IR:0,ADR:0,INF:0,PP:0}},{text:"Stopped it less than a year ago and symptoms got worse after",scores:{IR:0,ADR:0,INF:0,PP:3}},{text:"Stopped it years ago, symptoms were there before too",scores:{IR:1,ADR:1,INF:1,PP:0}}]},
+  { id:12, text:"What does your diet mostly look like?", options:[{text:"High carbs, rice, bread, lots of sugar — I know it's bad but the cravings are real",scores:{IR:3,ADR:0,INF:1,PP:0}},{text:"Mostly okay but I eat a lot when stressed or emotional",scores:{IR:0,ADR:2,INF:1,PP:0}},{text:"I eat okay but processed foods, dairy, or gluten seem to make my symptoms worse",scores:{IR:0,ADR:0,INF:3,PP:0}},{text:"My eating habits changed after stopping birth control",scores:{IR:0,ADR:0,INF:0,PP:2}}]}
+];
+const types = {
+  IR:{name:"Insulin Resistant PCOS",subtitle:"The most common type — driven by blood sugar",emoji:"🩸",desc:"Your PCOS is primarily driven by insulin resistance — your cells aren't responding properly to insulin, so your body produces more of it. That excess insulin signals your ovaries to produce more androgens (male hormones), which causes most of your symptoms. This is the most common type and very manageable once you address the root cause.",symptoms:["belly weight gain","sugar cravings","energy crashes","dark skin patches","hair loss","irregular periods","fast hair regrowth"],todo:["Get fasting insulin + fasting glucose tested","Myo-inositol (40:1 ratio with D-chiro) is your best friend","Lower refined carbs and sugar — this is the biggest lever","Walk after meals — even 10 mins helps insulin sensitivity","Magnesium glycinate for cravings and sleep","Ask doctor about Metformin if insulin is very high"]},
+  ADR:{name:"Adrenal PCOS",subtitle:"Driven by stress hormones, not insulin",emoji:"⚡",desc:"Your PCOS is primarily driven by your adrenal glands overproducing DHEAS (a stress hormone), not insulin. This type is heavily triggered by chronic stress, anxiety, and cortisol dysregulation. Your testosterone levels might actually be normal — but DHEAS is elevated. This type often gets worse during stressful life periods.",symptoms:["stress triggers everything","anxiety & racing mind","can't sleep at night","hair growth gets worse with stress","wired but exhausted","headaches","jaw tension"],todo:["Get DHEAS tested specifically — this is your key marker","Stress management is literally your treatment — not optional","Ashwagandha can help regulate cortisol","Prioritise sleep above everything else","Avoid intense cardio — it raises cortisol. Walk instead.","Magnesium glycinate before bed is essential for you"]},
+  INF:{name:"Inflammatory PCOS",subtitle:"Driven by chronic low-grade inflammation",emoji:"🔥",desc:"Your PCOS has a strong inflammatory component — your immune system is in a constant low-grade activated state which disrupts hormone production and ovarian function. This type often comes with gut issues, skin reactivity, joint pain, and feeling generally unwell. Certain foods, especially processed foods, dairy, and gluten, tend to make everything worse.",symptoms:["joint pain or body aches","gut issues","reactive inflamed skin","heavy painful periods","chronic fatigue","food sensitivities","frequent headaches"],todo:["Get CRP (C-reactive protein) and inflammatory markers tested","Anti-inflammatory diet is your main tool — reduce gluten, dairy, processed foods","Omega-3 (high dose) is crucial for you","Turmeric with black pepper daily","Gut health is connected — consider a probiotic","Identify your personal trigger foods — keep a food diary"]},
+  PP:{name:"Post-Pill PCOS",subtitle:"Triggered by stopping hormonal birth control",emoji:"💊",desc:"Your PCOS symptoms appeared or significantly worsened after stopping hormonal birth control. The pill suppresses your natural hormone production — when you stop it, your body sometimes overproduces androgens temporarily as it tries to recalibrate. The good news is this type often resolves on its own as your hormones rebalance, though it can take 6–12 months.",symptoms:["symptoms started after stopping pill","irregular cycles post-pill","new breakouts","new or worsened hair growth","mood changes","cycle hasn't returned to normal"],todo:["Give your body at least 6–12 months to recalibrate","Vitex (chasteberry) can help restore natural cycle","Get full hormone panel done — LH, FSH, testosterone, prolactin","Myo-inositol helps restore ovulation naturally","Avoid going back on the pill just to manage symptoms","Track your cycle even if it's irregular — patterns will emerge"]}
+};
+let current=0,answers=[],scores={IR:0,ADR:0,INF:0,PP:0};
+function renderStart(){document.getElementById('quizArea').innerHTML=`<div style="text-align:center;animation:fadeUp 0.6s ease both"><button class="btn-next" style="font-size:16px;padding:16px 40px" onclick="startQuiz()">Start the Quiz 🖤</button><p style="font-size:12px;color:var(--muted);margin-top:16px">12 questions · takes about 3 minutes</p></div>`;}
+function startQuiz(){document.getElementById('progressWrap').style.display='block';renderQuestion();}
+function renderQuestion(){const q=questions[current];const pct=Math.round((current/questions.length)*100);document.getElementById('progressLabel').textContent=`Question ${current+1} of ${questions.length}`;document.getElementById('progressPct').textContent=pct+'%';document.getElementById('progressFill').style.width=pct+'%';const sel=answers[current]!==undefined?answers[current]:-1;document.getElementById('quizArea').innerHT
+function renderTypeCard(typeKey,score,total,isPrimary){const t=types[typeKey];const pct=Math.min(Math.round((score/total)*100*2.5),100);return `<div class="type-card ${isPrimary?'primary':''}"><div class="type-subtitle">${isPrimary?'Your Primary Type':'Also Present'}</div><div class="type-name">${t.emoji} ${t.name}</div><div class="type-subtitle">${t.subtitle}</div><div class="score-bar-wrap"><div class="score-label"><span>match strength</span><span>${pct}%</span></div><div class="score-bar"><div class="score-fill" data-width="${pct}%" style="width:0%"></div></div></div><div class="type-desc">${t.desc}</div><div class="symptoms-list">${t.symptoms.map(s=>`<span class="symptom-tag">${s}</span>`).join('')}</div><div class="what-to-do"><h4>where to start</h4><ul>${t.todo.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;}
+function shareQuiz(){const url=window.location.href;if(navigator.share){navigator.share({title:'What type of PCOS do you have?',text:'I just found out my PCOS type 🖤 take this quiz by @mysmudgykajal',url:url}).catch(()=>{});}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(()=>{const t=document.getElementById('shareToast');t.style.display='block';setTimeout(()=>t.style.display='none',3000);});}}
+function restartQuiz(){current=0;answers=[];scores={IR:0,ADR:0,INF:0,PP:0};document.getElementById('quizHeader').style.display='block';document.getElementById('progressWrap').style.display='none';renderStart();window.scrollTo({top:0,behavior:'smooth'});}
+renderStart();
+</script>
+</body>
+</html>
